@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Digi';
+  src: url('./fonts/Digital7Mono-Yz9J4.ttf') format('truetype');
+}
+
+*,:root{
+  margin:0;
+  padding: 0;
+}
+.numAndActions{
+  color: white;
+}
+button{
+  border: 0.5px solid white;
+  background-color: #222;;
+  padding: 40px;
+  transition: all 0.5s ease !important;
+}
+
+button:hover{
+  filter: brightness(150%) !important;
+}
+
+.display{
+font-family: 'Digi', sans-serif;
+font-weight: bold;
+letter-spacing: 2px;
+}
