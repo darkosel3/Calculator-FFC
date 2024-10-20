@@ -3,7 +3,6 @@ import mathItUp from './libs/mathItUp';
 import {Parser} from 'expr-eval'
 import './App.css';
 const parser = new Parser();
-// console.log(parser.parse('2--3').evaluate())
 
 export const ACTIONS = {
     AC:"ac",
@@ -34,35 +33,29 @@ function reducer(state,action){
           previousOperand: state.previousOperand + action.payload
       }
       case ACTIONS.MATH:
-          console.log(result.previousOperand.slice(-2))
           if(typeof parseInt(result.currentOperand.slice(-1)) == 'number' && !isNaN(parseInt(result.previousOperand.slice(-1)))){
             // ukoliko je trenutni karakter broj i ukoliko je prethodni poslednji karakter nije broj
             result.currentOperand = action.payload
             result.previousOperand += action.payload
-            console.log('typeof if')
             return result
           }
           if(lastTwoCharPrev == '--' || lastTwoCharPrev == '++' || lastTwoCharPrev == '*-'|| lastTwoCharPrev =='+-' || lastTwoCharPrev == '/-'){
             // ukoliko su u trenutnomOperatoru poslednja dva karaktera minusi
             result.previousOperand = state.previousOperand.slice(0, -2) + action.payload;
             result.currentOperand = action.payload
-            console.log("-- if")
             return result
           }else{
           if(lastDigit == '/' || lastDigit == '*' || lastDigit == '+' || lastDigit == '-'){
           result.previousOperand = state.previousOperand.slice(0, -1) + action.payload;
           result.currentOperand = action.payload
-          console.log("/ if")
           return result
           }else{
             result.previousOperand += action.payload
             result.currentOperand += action.payload
-            console.log("else ")
             return result  
           }}
       
       case ACTIONS.MINUS:
-        console.log(lastTwoCharPrev)
         if(lastTwoCharPrev == '--' || lastTwoCharPrev == '*-'|| lastTwoCharPrev == '+-'|| lastTwoCharPrev == '/-'){ // kada su na kraju proslog dva minusa vrati stanje
           return result
         }
@@ -72,11 +65,6 @@ function reducer(state,action){
           return result
         }
       case ACTIONS.DOT:
-        console.log(parseInt(lastDigit))
-        console.log(isNaN(parseInt(lastDigit)))
-        console.log(lastDigit !== '.')
-        console.log(lastDigit && isNaN(parseInt(lastDigit)) && lastDigit !== '.')
-
         if(result.currentOperand.includes('.')){
           return result
         }
@@ -97,7 +85,6 @@ function reducer(state,action){
 
       
       default:
-        console.log(state.previousOperand[0])
         return state;
         
     
